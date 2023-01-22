@@ -150,18 +150,12 @@ def split_args(string: str) -> list[str]:
     out = []
     temp = ""
     for f in frags:
-        if temp:
-            if are_matching_brackets(temp):
-                out.append(temp)
-                temp = ""
-            else:
-                temp += " " + f
-        elif are_matching_brackets(f):
-            out.append(f)
-        else:
+        if not temp:
             temp = f
-    if temp and are_matching_brackets(temp):
+        if not are_matching_brackets(temp):
+            temp += " " + f
         out.append(temp)
+        temp = ""
     return out
 
 
